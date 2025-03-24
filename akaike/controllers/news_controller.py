@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, status
-from akaike.utils.scraper import scrape_company_news
+from akaike.utils.scraper_utils import scrape_company_news
 from akaike.models.company_model import CompanyRequestModel, CompanyResponseModel
 from akaike.models.response_model import ResponseBaseModel
 
@@ -30,5 +30,5 @@ async def get_news(request: CompanyRequestModel = Depends()):
         status_code=status.HTTP_200_OK
     )
 
-    return response.model_dump()
+    return response
 

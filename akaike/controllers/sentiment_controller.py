@@ -1,12 +1,25 @@
 from fastapi import APIRouter, status
-from akaike.utils.scraper import scrape_company_news
-from akaike.utils.sentiment import analyze_sentiment, bulk_analyze_sentiment
+from akaike.utils.scraper_utils import scrape_company_news
+from akaike.utils.sentiment_utils import analyze_sentiment, bulk_analyze_sentiment
 from akaike.models.response_model import ResponseBaseModel
 router = APIRouter()
 
 @router.post("/sentiment/")
 async def get_sentiment(text: str):
-    return {"sentiment": analyze_sentiment(text)}
+    sentiment, error = analyze_sentiment(text)
+    if error:
+        return ResponseBaseModel(
+            data  = None,
+            error = error,
+            message = "Error Processing Request",
+            status_code = status.HTTP_400_REQUEST
+        )
+    return ResponseBaseModel(
+        data = sentiment,
+        error = None,
+        message = "Successfully Analyed Sentiment",
+        status_code = status.HTTP_200_OK
+    )
 
 
 

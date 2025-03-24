@@ -2,7 +2,7 @@ import requests
 from typing import Optional
 from bs4 import BeautifulSoup
 from akaike.models import ArticleModel
-from .sentiment import analyze_sentiment
+from .sentiment_utils import analyze_sentiment
 def scrape_company_news(company_name) -> tuple[Optional[ArticleModel],Optional[str]]:
     try:
         url = f"https://www.google.com/search?q={company_name}&tbm=nws"
