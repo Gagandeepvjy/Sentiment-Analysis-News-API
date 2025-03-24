@@ -1,9 +1,9 @@
 import requests
-from typing import Optional
+from typing import Optional, List
 from bs4 import BeautifulSoup
 from akaike.models import ArticleModel
 from .sentiment_utils import analyze_sentiment
-def scrape_company_news(company_name) -> tuple[Optional[ArticleModel],Optional[str]]:
+def scrape_company_news(company_name) -> tuple[Optional[List[ArticleModel]],Optional[str]]:
     try:
         url = f"https://www.google.com/search?q={company_name}&tbm=nws"
         headers = {

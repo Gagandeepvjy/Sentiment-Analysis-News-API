@@ -7,7 +7,7 @@ from akaike.models.response_model import ResponseBaseModel
 router = APIRouter()
 
 @router.post("/speech/")
-async def generate_speech(request: CompanyRequestModel = Depends()):
+async def generate_speech(request: CompanyRequestModel):
     articles, error = scrape_company_news(request.company_name)
     if error:
         return ResponseBaseModel(

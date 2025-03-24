@@ -13,3 +13,4 @@ class CompanyRequestModel(BaseModel):
 class CompanyResponseModel(BaseModel):
     company: str
     articles: List[ArticleModel]
+    comparitive_sentiment: str
