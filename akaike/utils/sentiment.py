@@ -1,5 +1,7 @@
 import nltk
+from typing import List
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from akaike.models.company_model import ArticleModel
 
 nltk.download("vader_lexicon")
 analyzer = SentimentIntensityAnalyzer()
@@ -14,3 +16,12 @@ def analyze_sentiment(text):
         return "Neutral",None
     except Exception as e:
         return None, str(e)
+
+def bulk_analyze_sentiment(articles: List[ArticleModel]):
+    results = []
+    for article in articles:
+        sentiment, error = analyze_sentiment(article.summary)
+        if error:
+            return None,error
+        results.append(sentiment)
+    return results, None
